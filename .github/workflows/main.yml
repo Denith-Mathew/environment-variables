@@ -1,16 +1,26 @@
-name: my_workflow
+name: env-demo-workflow
 
 on:
   workflow_dispatch:
 
+# 🔹 Workflow-level environment variables
 env:
-  -name: denith
+  APP_NAME: MyApp
+  OWNER: Denith
 
 jobs:
-  my_first_job:
-    runs-on: windows-latest
-    steps:
-      - name: Print name
-        run: echo "my name is $name"
+  demo_job:
+    runs-on: ubuntu-latest
 
-           
+    # 🔹 Job-level environment variables
+    env:
+      ENVIRONMENT: Production
+      VERSION: v1.0
+
+    steps:
+      - name: Print all environment variables
+        run: |
+          echo "App Name: $APP_NAME"
+          echo "Owner: $OWNER"
+          echo "Environment: $ENVIRONMENT"
+          echo "Version: $VERSION"
